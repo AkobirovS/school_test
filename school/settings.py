@@ -26,7 +26,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG") == "1"
 
-ALLOWED_HOSTS = ["*, localHosts",'127.0.0.1',"school-test-fi22.onrender.com"]
+ALLOWED_HOSTS = ["*", "localhost", "127.0.0.1", "school-test-fi22.onrender.com"]
 
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -41,11 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'school_app',
-    'rest_framework'
+    'rest_framework',
     'corsheaders',
 ]
 
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # ← ставим первым!
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -53,8 +55,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',  # ⬅️ ДО других middleware
-    'django.middleware.security.SecurityMiddleware',
 ]
 
 ROOT_URLCONF = 'school.urls'
