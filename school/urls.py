@@ -16,15 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path , include
-from rest_framework.routers import SimpleRouter
+from school_app import views
 
-from school_app.views import UserViewSet
-
-router = SimpleRouter()
-router.register(r'users', UserViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('school_app.urls', namespace='school_app')),
+    path('api/registration/', views.RegistrationView.as_view(), name='api-registration'),
 ]
-urlpatterns += router.urls
